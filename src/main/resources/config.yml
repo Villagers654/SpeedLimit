@@ -4,7 +4,6 @@
 #                            SpeedLimit Configuration                              #
 #                                 By Loving11ish                                   #
 #                            ------------------------                              #
-#                            --[mc.crapticraft.com]--                              #
 #----------------------------------------------------------------------------------#
 #----------------------------------------------------------------------------------#
 #                            --[Plugin Config File]--                              #
@@ -13,47 +12,70 @@
 
 #----------------------------------------------------------------------------------#
 #For a player or group to bypass this limit, give them 'SpeedLimit.bypass.walking'.
-#This enables the SpeedLimit for the player's walking speed.
-Enable-walking-limit: false #[Default: false]
-#This sets the maximum speed that the player can walk at. (0.00 to 1.00)
-Walking-speed-limit: 0.10 #[Default: 0.10]
+walking-event:
+  #This enables the SpeedLimit for the player's walking speed.
+  enabled: false #[Default: false]
+  #This sets the maximum speed that the player can walk at. (0.00 to 1.00)
+  speed: 0.10 #[Default: 0.10]
 #----------------------------------------------------------------------------------#
 
 #----------------------------------------------------------------------------------#
 #For a player or group to bypass this limit, give them 'SpeedLimit.bypass.flying'.
-#This enables the SpeedLimit for the player's flying speed.
-Enable-flying-limit: true #[Default: true]
-#This sets the maximum speed that the player can fly at. (0.00 to 1.00)
-Flying-speed-limit: 0.02 #[Default: 0.02]
+flying-event:
+  #This enables the SpeedLimit for the player's flying speed.
+  enabled: true #[Default: true]
+  #This sets the maximum speed that the player can fly at. (0.00 to 1.00)
+  speed: 0.02 #[Default: 0.02]
 #----------------------------------------------------------------------------------#
 
 #----------------------------------------------------------------------------------#
-#          THIS IS CURRENTLY EXPERIMENTAL!  BUGS SHOULD BE EXPECTED!!
-#Do you want to disable the use of elyta's completely?
-Disable-all-elytra-flight: false #[Default: false]
+elytra-flight-event:
+  #Do you want to disable the use of elyta's completely?
+  disable-all-elytra-flight: false #[Default: false]
 
-#For a player or group to bypass this limit, give them 'SpeedLimit.bypass.elytra'.
-#This enables the SpeedLimit for the player's elytra flying speed.
-Enable-elytra-limit: true #[Default: true]
+  speed-limit:
+    #For a player or group to bypass this limit, give them 'SpeedLimit.bypass.elytra'.
+    #This enables the SpeedLimit for the player's elytra flying speed.
+    enabled: true #[Default: true]
+    #This sets the maximum speed that the player can elytra fly at before the plugin
+    #triggers and resets their flight speed. (1.0 to 5.0)
+    #Speed Multiplier Checking Limits:
+    #(Relaxed: 5.0, Default: 2.5, More strict: 2.0, Extremely Strict: 1.0)
+    trigger-speed: 2.5 #[Default: 2.5]
+    #If triggered, do you want to cancel the elytra event or TP the player back?
+    cancel-event: false #[Default: false]
+    #Do you want to send a warning message to the player?
+    send-message: true #[Default: true]
+#----------------------------------------------------------------------------------#
 
-#This sets the maximum speed that the player can elytra fly at before the plugin
-#triggers and resets their flight speed. (1.0 to 5.0)
-#Speed Multiplier Checking Limits:
-#(Relaxed: 5.0, Default: 2.5, More strict: 2.0, Extremely Strict: 1.0)
-Elytra-speed-limit-trigger: 2.5 #[Default: 2.5]
+#----------------------------------------------------------------------------------#
+#                      THIS FEATURE IS HIGHLY EXPERIMENTAL!                        #
+#                               USE WITH CAUTION!                                  #
+#----------------------------------------------------------------------------------#
+#Do you want to print the severs TPS value to the console?
+#This DOES NOT disable the TPS task!
+tps:
+  console:
+    enabled: true #[Default: true]
 
-#If triggered, do you want to cancel the elytra event or TP the player back?
-Cancel-event-completely: false #[Default: false]
+  #This sets the interval between TPS checking tasks
+  #If your server is lightweight try increasing this
+  run-interval: 300 #[Default: 300] {range: 60 - 900} 300 = 5 minutes.
 
-#Do you want to send a warning message to the player?
-Send-warning-message: true #[Default: true]
+  #Do you want to use the server TPS to dynamically disable Elytras based on the value?
+  dynamic-elytra-check:
+    enabled: true #[Default: true]
+    #This is the TPS value you want the plugin to trigger at or if below it.
+    trigger-value: 15.0 #[Default: 15.0] {recommended: do not set above 17.0}
+    #Do you want to send a warning message to the player?
+    send-warning-message: true #[Default: true]
 #----------------------------------------------------------------------------------#
 
 #----------------------------------------------------------------------------------#
 #Do you wish to disable the SpeedLimits in certain worlds?
 #Enter the world names in the list below (THEY ARE CASE SENSITIVE)
 #Remove the '[]' and the '#' in front of the '-' listed below.
-Disabled-Worlds: [] #[Default: NONE]
+disabled-Worlds: [] #[Default: NONE]
 #  - 'world_nether'
 #  - 'world_the_end'
 #----------------------------------------------------------------------------------#

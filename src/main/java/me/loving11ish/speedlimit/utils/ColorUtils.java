@@ -1,4 +1,4 @@
-package me.loving11ish.speedlimit.Utils;
+package me.loving11ish.speedlimit.utils;
 
 import org.bukkit.ChatColor;
 

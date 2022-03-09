@@ -4,48 +4,51 @@
 #                            SpeedLimit Configuration                              #
 #                                 By Loving11ish                                   #
 #                            ------------------------                              #
-#                            --[mc.crapticraft.com]--                              #
 #----------------------------------------------------------------------------------#
 #----------------------------------------------------------------------------------#
 #                           --[Plugin Messages File]--                             #
 #----------------------------------------------------------------------------------#
 #----------------------------------------------------------------------------------#
 #Changing the prefix requires a restart or '/reload' to take effect.
-Plugin-prefix: "&7[&bSpeed&3Limit&7]"
+plugin-prefix: "&7[&bSpeed&3Limit&7]"
 #----------------------------------------------------------------------------------#
-Plugin-no-update-1: "&a*-------------------------------------------*"
-Plugin-no-update-2: "%PREFIX% &a- Plugin is up to date"
-Plugin-no-update-3: "&a*-------------------------------------------*"
+plugin-no-update-1: "&a*-------------------------------------------*"
+plugin-no-update-2: "%PREFIX% &a- Plugin is up to date"
+plugin-no-update-3: "&a*-------------------------------------------*"
 #----------------------------------------------------------------------------------#
-Plugin-update-available-1: "&c*-------------------------------------------*"
-Plugin-update-available-2: "%PREFIX% &c- A new version is available!"
-Plugin-update-available-3: "&c*-------------------------------------------*"
+plugin-update-available-1: "&c*-------------------------------------------*"
+plugin-update-available-2: "%PREFIX% &c- A new version is available!"
+plugin-update-available-3: "&c*-------------------------------------------*"
 #----------------------------------------------------------------------------------#
-Update-check-failure-1: "&c*-------------------------------------------*"
-Update-check-failure-2: "%PREFIX% &c- Unable to check for updates: &4%ERROR%"
-Update-check-failure-3: "&c*-------------------------------------------*"
+update-check-failure-1: "&c*-------------------------------------------*"
+update-check-failure-2: "%PREFIX% &c- Unable to check for updates: &4%ERROR%"
+update-check-failure-3: "&c*-------------------------------------------*"
 #----------------------------------------------------------------------------------#
-Plugin-help-1: "&e[---------------------------------------------------]"
-Plugin-help-2: "%PREFIX% &f/slreload &7- &dThis command reloads the main config file."
-Plugin-help-3: "%PREFIX% &f/slhelp &7- &dThis command shows this help menu."
-Plugin-help-4: "%PREFIX% &bPermissions:"
-Plugin-help-5: "%PREFIX% &fAll permission &7- &dSpeedLimit.*"
-Plugin-help-6: "%PREFIX% &f/slreload &7- &dSpeedLimit.reload"
-Plugin-help-7: "%PREFIX% &f/slhelp &7- &dSpeedLimit.help"
-Plugin-help-8: "%PREFIX% &fWalking Bypass &7- &dSpeedLimit.bypass.walking"
-Plugin-help-9: "%PREFIX% &fFlying Bypass &7- &dSpeedLimit.bypass.flying"
-Plugin-help-10: "%PREFIX% &fElytra Bypass &7-&dSpeedLimit.bypass.elytra"
-Plugin-help-11: "&e[---------------------------------------------------]"
+plugin-help-1: "&e[---------------------------------------------------]"
+plugin-help-2: "%PREFIX% &f/slreload &7- &dThis command reloads the main config file."
+plugin-help-3: "%PREFIX% &f/slhelp &7- &dThis command shows this help menu."
+plugin-help-4: "%PREFIX% &bPermissions:"
+plugin-help-5: "%PREFIX% &fAll permission &7- &dSpeedLimit.*"
+plugin-help-6: "%PREFIX% &f/slreload &7- &dSpeedLimit.reload"
+plugin-help-7: "%PREFIX% &f/slhelp &7- &dSpeedLimit.help"
+plugin-help-8: "%PREFIX% &fWalking Bypass &7- &dSpeedLimit.bypass.walking"
+plugin-help-9: "%PREFIX% &fFlying Bypass &7- &dSpeedLimit.bypass.flying"
+plugin-help-10: "%PREFIX% &fElytra Bypass &7-&dSpeedLimit.bypass.elytra"
+plugin-help-11: "&e[---------------------------------------------------]"
 #----------------------------------------------------------------------------------#
-Reload-successful-1: "&e[---------------------------------------------------]"
-Reload-successful-2: "%PREFIX% &7- &aPlugin by Loving11ish"
-Reload-successful-3: "%PREFIX% &7- &aConfiguration files have been successfully reloaded!"
-Reload-successful-4: "&e[---------------------------------------------------]"
+reload-successful-1: "&e[---------------------------------------------------]"
+reload-successful-2: "%PREFIX% &7- &aPlugin by Loving11ish"
+reload-successful-3: "%PREFIX% &7- &aConfiguration files have been successfully reloaded!"
+reload-successful-4: "&e[---------------------------------------------------]"
 #----------------------------------------------------------------------------------#
-Help-no-permission: "%PREFIX% &4You do not have the permission &7'&eSpeedLimit.help&7' &4required to execute that command!"
-Reload-no-permission: "%PREFIX% &4You do not have the permission &7'&eSpeedLimit.reload&7' &4required to execute that command!"
+help-no-permission: "%PREFIX% &4You do not have the permission &7'&eSpeedLimit.help&7' &4required to execute that command!"
+reload-no-permission: "%PREFIX% &4You do not have the permission &7'&eSpeedLimit.reload&7' &4required to execute that command!"
 #----------------------------------------------------------------------------------#
-Elytras-disabled-warning: "%PREFIX% &cElytra's have been disabled by and administrator"
+elytras-disabled-warning: "%PREFIX% &cElytra's have been disabled by and administrator"
 #----------------------------------------------------------------------------------#
-Elytra-triggered-warning: "%PREFIX% &cYou are flying too fast! Slow down!"
+TPS-elytras-disabled-warning: "%PREFIX% &cYour elytra has been disabled due to TPS drop!"
+#----------------------------------------------------------------------------------#
+elytra-triggered-warning: "%PREFIX% &cYou are flying too fast! Slow down!"
+#----------------------------------------------------------------------------------#
+console-TPS: "%PREFIX% &eServer TPS: &a%TPS%"
 #----------------------------------------------------------------------------------#

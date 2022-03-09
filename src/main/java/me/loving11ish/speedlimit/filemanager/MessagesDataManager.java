@@ -1,7 +1,7 @@
-package me.loving11ish.speedlimit.FileManager;
+package me.loving11ish.speedlimit.filemanager;
 
 import me.loving11ish.speedlimit.SpeedLimit;
-import me.loving11ish.speedlimit.Utils.ColorUtils;
+import me.loving11ish.speedlimit.utils.ColorUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 

@@ -1,8 +1,9 @@
-package me.loving11ish.speedlimit.UpdateSystem;
+package me.loving11ish.speedlimit.updatesystem;
 
 import me.loving11ish.speedlimit.SpeedLimit;
-import me.loving11ish.speedlimit.Utils.ColorUtils;
+import me.loving11ish.speedlimit.utils.ColorUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Consumer;
 
@@ -17,7 +18,8 @@ public class UpdateChecker {
     private Plugin plugin;
     private int resourceId;
 
-    private static final String PREFIX = ColorUtils.translateColorCodes(SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig().getString("Plugin-prefix"));
+    private static final FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    private static final String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
     private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
     private static final String ERROR_PLACEHOLDER = "%ERROR%";
 
@@ -35,9 +37,12 @@ public class UpdateChecker {
                     consumer.accept(scanner.next());
                 }
             } catch (IOException exception) {
-                logger.warning(ColorUtils.translateColorCodes(SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig().getString("Update-check-failure-1").replace(PREFIX_PLACEHOLDER, PREFIX).replace(ERROR_PLACEHOLDER, exception.getMessage())));
-                logger.warning(ColorUtils.translateColorCodes(SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig().getString("Update-check-failure-2").replace(PREFIX_PLACEHOLDER, PREFIX).replace(ERROR_PLACEHOLDER, exception.getMessage())));
-                logger.warning(ColorUtils.translateColorCodes(SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig().getString("Update-check-failure-3").replace(PREFIX_PLACEHOLDER, PREFIX).replace(ERROR_PLACEHOLDER, exception.getMessage())));
+                logger.warning(ColorUtils.translateColorCodes(messagesFile.getString("update-check-failure-1").replace(PREFIX_PLACEHOLDER, PREFIX)
+                        .replace(ERROR_PLACEHOLDER, exception.getMessage())));
+                logger.warning(ColorUtils.translateColorCodes(messagesFile.getString("update-check-failure-2").replace(PREFIX_PLACEHOLDER, PREFIX)
+                        .replace(ERROR_PLACEHOLDER, exception.getMessage())));
+                logger.warning(ColorUtils.translateColorCodes(messagesFile.getString("update-check-failure-3").replace(PREFIX_PLACEHOLDER, PREFIX)
+                        .replace(ERROR_PLACEHOLDER, exception.getMessage())));
             }
         });
     }

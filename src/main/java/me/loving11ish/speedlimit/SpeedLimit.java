@@ -1,14 +1,15 @@
 package me.loving11ish.speedlimit;
 
-import me.loving11ish.speedlimit.Commands.SLHelp;
-import me.loving11ish.speedlimit.Commands.SLReload;
-import me.loving11ish.speedlimit.Events.ElytraFlightEvent;
-import me.loving11ish.speedlimit.Events.FlightEvent;
-import me.loving11ish.speedlimit.Events.PlayerMoveEvent;
-import me.loving11ish.speedlimit.FileManager.MessagesDataManager;
-import me.loving11ish.speedlimit.UpdateSystem.JoinEvent;
-import me.loving11ish.speedlimit.UpdateSystem.UpdateChecker;
-import me.loving11ish.speedlimit.Utils.ColorUtils;
+import me.loving11ish.speedlimit.commands.SLHelp;
+import me.loving11ish.speedlimit.commands.SLReload;
+import me.loving11ish.speedlimit.events.ElytraFlightEvent;
+import me.loving11ish.speedlimit.events.FlightEvent;
+import me.loving11ish.speedlimit.events.PlayerMoveEvent;
+import me.loving11ish.speedlimit.filemanager.MessagesDataManager;
+import me.loving11ish.speedlimit.updatesystem.JoinEvent;
+import me.loving11ish.speedlimit.updatesystem.UpdateChecker;
+import me.loving11ish.speedlimit.utils.ColorUtils;
+import me.loving11ish.speedlimit.tasks.TPSCheckTasks;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -23,6 +24,8 @@ public final class SpeedLimit extends JavaPlugin {
     private static SpeedLimit plugin;
 
     public MessagesDataManager messagesDataManager;
+
+    private static Double serverTPS = 20.0;
 
     private final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
@@ -47,7 +50,7 @@ public final class SpeedLimit extends JavaPlugin {
             logger.warning(ChatColor.RED + "SpeedLimit - 1.18.x");
             logger.warning(ChatColor.RED + "SpeedLimit - Is now disabling!");
             logger.warning(ChatColor.RED + "-------------------------------------------");
-            Bukkit.getPluginManager().disablePlugin(plugin);
+            Bukkit.getPluginManager().disablePlugin(this);
         }else {
             logger.info(ChatColor.GREEN + "-------------------------------------------");
             logger.info(ChatColor.GREEN + "SpeedLimit - A supported Minecraft version has been detected");
@@ -77,33 +80,71 @@ public final class SpeedLimit extends JavaPlugin {
         //Run elytra velocity update task
         ElytraFlightEvent.updateElytraTriggerValue();
 
+        //Start TPS checking tasks
+        TPSCheckTasks.checkTPSOne();
+
         //Plugin load message
         logger.info("-------------------------------------------");
-        logger.info(ChatColor.AQUA + "SpeedLimit SpeedLimit plugin by Loving11ish");
-        logger.info(ChatColor.AQUA + "SpeedLimit has been loaded successfully");
-        logger.info(ChatColor.AQUA + "SpeedLimit Version " + ChatColor.LIGHT_PURPLE + pluginVersion);
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bPlugin by Loving11ish"));
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bPlugin successfully enabled!"));
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bPlugin Version &d" + pluginVersion));
         logger.info("-------------------------------------------");
 
         //Check for available updates
-        String PREFIX = this.messagesDataManager.getMessagesConfig().getString("Plugin-prefix");
+        String PREFIX = this.messagesDataManager.getMessagesConfig().getString("plugin-prefix");
         new UpdateChecker(this, 75269).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("Plugin-no-update-1").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("Plugin-no-update-2").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("Plugin-no-update-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
+                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-no-update-1")
+                        .replace(PREFIX_PLACEHOLDER, PREFIX)));
+                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-no-update-2")
+                        .replace(PREFIX_PLACEHOLDER, PREFIX)));
+                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-no-update-3")
+                        .replace(PREFIX_PLACEHOLDER, PREFIX)));
             }else {
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("Plugin-update-available-1").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("Plugin-update-available-2").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("Plugin-update-available-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
+                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-1")
+                        .replace(PREFIX_PLACEHOLDER, PREFIX)));
+                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-2")
+                        .replace(PREFIX_PLACEHOLDER, PREFIX)));
+                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-3")
+                        .replace(PREFIX_PLACEHOLDER, PREFIX)));
             }
         });
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        //Shutdown message
+        logger.info("-------------------------------------------");
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bPlugin by Loving11ish"));
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bPlugin Version &d" + pluginVersion));
+
+        //Stop TPS tasks
+        try {
+            if (Bukkit.getScheduler().isCurrentlyRunning(TPSCheckTasks.taskID1)||Bukkit.getScheduler().isQueued(TPSCheckTasks.taskID1)){
+                Bukkit.getScheduler().cancelTask(TPSCheckTasks.taskID1);
+            }
+            if (Bukkit.getScheduler().isCurrentlyRunning(TPSCheckTasks.taskID2)||Bukkit.getScheduler().isQueued(TPSCheckTasks.taskID2)){
+                Bukkit.getScheduler().cancelTask(TPSCheckTasks.taskID2);
+            }
+            logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bAll background tasks disabled successfully!"));
+        }catch (Exception e){
+            logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bAll background tasks disabled successfully!"));
+        }
+
+        //Final shutdown message
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bPlugin shutdown successfully!"));
+        logger.info("-------------------------------------------");
+
     }
     public static SpeedLimit getPlugin() {
         return plugin;
+    }
+
+    public static Double getServerTPS() {
+        return serverTPS;
+    }
+
+    public static void setServerTPS(Double serverTPS) {
+        SpeedLimit.serverTPS = serverTPS;
     }
 }
