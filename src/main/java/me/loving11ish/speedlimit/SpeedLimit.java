@@ -22,11 +22,8 @@ public final class SpeedLimit extends JavaPlugin {
     private PluginDescriptionFile pluginInfo = getDescription();
     private String pluginVersion = pluginInfo.getVersion();
     private static SpeedLimit plugin;
-
     public MessagesDataManager messagesDataManager;
-
     private static Double serverTPS = 20.0;
-
     private final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     Logger logger = this.getLogger();
