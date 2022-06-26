@@ -10,8 +10,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinEvent implements Listener {
 
-    private static final FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
-    private static final String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
+    private FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    private String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
     private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     @EventHandler
@@ -20,9 +20,12 @@ public class JoinEvent implements Listener {
         if (player.hasPermission("SpeedLimit.update")|| player.hasPermission("SpeedLimit.*")||player.isOp()) {
             new UpdateChecker(SpeedLimit.getPlugin(), 75269).getVersion(version -> {
                 if (!(SpeedLimit.getPlugin().getDescription().getVersion().equalsIgnoreCase(version))) {
-                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-1").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-2").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
+                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-1")
+                            .replace(PREFIX_PLACEHOLDER, PREFIX)));
+                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-2")
+                            .replace(PREFIX_PLACEHOLDER, PREFIX)));
+                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-3")
+                            .replace(PREFIX_PLACEHOLDER, PREFIX)));
                 }
             });
         }

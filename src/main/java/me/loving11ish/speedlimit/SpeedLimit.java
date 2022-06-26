@@ -3,8 +3,9 @@ package me.loving11ish.speedlimit;
 import me.loving11ish.speedlimit.commands.SLHelp;
 import me.loving11ish.speedlimit.commands.SLReload;
 import me.loving11ish.speedlimit.events.ElytraFlightEvent;
+import me.loving11ish.speedlimit.events.ElytraTPSFlightEvent;
 import me.loving11ish.speedlimit.events.FlightEvent;
-import me.loving11ish.speedlimit.events.PlayerMoveEvent;
+import me.loving11ish.speedlimit.events.PlayerWalkEvent;
 import me.loving11ish.speedlimit.filemanager.MessagesDataManager;
 import me.loving11ish.speedlimit.updatesystem.JoinEvent;
 import me.loving11ish.speedlimit.updatesystem.UpdateChecker;
@@ -19,8 +20,8 @@ import java.util.logging.Logger;
 
 public final class SpeedLimit extends JavaPlugin {
 
-    private PluginDescriptionFile pluginInfo = getDescription();
-    private String pluginVersion = pluginInfo.getVersion();
+    private final PluginDescriptionFile pluginInfo = getDescription();
+    private final String pluginVersion = pluginInfo.getVersion();
     private static SpeedLimit plugin;
     public MessagesDataManager messagesDataManager;
     private static Double serverTPS = 20.0;
@@ -71,9 +72,10 @@ public final class SpeedLimit extends JavaPlugin {
         getCommand("slreload").setExecutor(new SLReload());
 
         //Register event listeners
-        getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerWalkEvent(), this);
         getServer().getPluginManager().registerEvents(new FlightEvent(), this);
         getServer().getPluginManager().registerEvents(new ElytraFlightEvent(), this);
+        getServer().getPluginManager().registerEvents(new ElytraTPSFlightEvent(), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
 
         //Run elytra velocity update task
@@ -119,11 +121,14 @@ public final class SpeedLimit extends JavaPlugin {
 
         //Stop TPS tasks
         try {
-            if (Bukkit.getScheduler().isCurrentlyRunning(TPSCheckTasks.taskID1)||Bukkit.getScheduler().isQueued(TPSCheckTasks.taskID1)){
-                Bukkit.getScheduler().cancelTask(TPSCheckTasks.taskID1);
+            if (Bukkit.getScheduler().isCurrentlyRunning(ElytraFlightEvent.taskID1)||Bukkit.getScheduler().isQueued(ElytraFlightEvent.taskID1)){
+                Bukkit.getScheduler().cancelTask(ElytraFlightEvent.taskID1);
             }
             if (Bukkit.getScheduler().isCurrentlyRunning(TPSCheckTasks.taskID2)||Bukkit.getScheduler().isQueued(TPSCheckTasks.taskID2)){
                 Bukkit.getScheduler().cancelTask(TPSCheckTasks.taskID2);
+            }
+            if (Bukkit.getScheduler().isCurrentlyRunning(TPSCheckTasks.taskID3)||Bukkit.getScheduler().isQueued(TPSCheckTasks.taskID3)){
+                Bukkit.getScheduler().cancelTask(TPSCheckTasks.taskID3);
             }
             logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bAll background tasks disabled successfully!"));
         }catch (Exception e){
@@ -133,8 +138,8 @@ public final class SpeedLimit extends JavaPlugin {
         //Final shutdown message
         logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7] &bPlugin shutdown successfully!"));
         logger.info("-------------------------------------------");
-
     }
+
     public static SpeedLimit getPlugin() {
         return plugin;
     }

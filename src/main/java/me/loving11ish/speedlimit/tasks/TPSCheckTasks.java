@@ -18,32 +18,10 @@ public class TPSCheckTasks {
     private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
     private static final String TPS_PLACEHOLDER = "%TPS%";
 
-    public static Integer taskID1;
     public static Integer taskID2;
+    public static Integer taskID3;
 
     public static void checkTPSOne(){
-        taskID1 = Bukkit.getScheduler().scheduleSyncRepeatingTask(SpeedLimit.getPlugin(), new Runnable() {
-            Integer time = configFile.getInt("tps.run-interval");
-            @Override
-            public void run() {
-                if (time == 1){
-                    ServerTPSUtils tpsUtils = new ServerTPSUtils();
-                    String tps = tpsUtils.getTPS(0);
-                    if (configFile.getBoolean("tps.console.enabled")){
-                        logger.info(ColorUtils.translateColorCodes(messagesFile.getString("console-TPS").replace(PREFIX_PLACEHOLDER, PREFIX)
-                                .replace(TPS_PLACEHOLDER, tps)));
-                    }
-                    SpeedLimit.setServerTPS(Double.valueOf(tps));
-                    checkTPSTwo();
-                    Bukkit.getScheduler().cancelTask(taskID1);
-                }else {
-                    time --;
-                }
-            }
-        },0, 20);
-    }
-
-    public static void checkTPSTwo(){
         taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(SpeedLimit.getPlugin(), new Runnable() {
             Integer time = configFile.getInt("tps.run-interval");
             @Override
@@ -56,8 +34,30 @@ public class TPSCheckTasks {
                                 .replace(TPS_PLACEHOLDER, tps)));
                     }
                     SpeedLimit.setServerTPS(Double.valueOf(tps));
-                    checkTPSOne();
+                    checkTPSTwo();
                     Bukkit.getScheduler().cancelTask(taskID2);
+                }else {
+                    time --;
+                }
+            }
+        },0, 20);
+    }
+
+    public static void checkTPSTwo(){
+        taskID3 = Bukkit.getScheduler().scheduleSyncRepeatingTask(SpeedLimit.getPlugin(), new Runnable() {
+            Integer time = configFile.getInt("tps.run-interval");
+            @Override
+            public void run() {
+                if (time == 1){
+                    ServerTPSUtils tpsUtils = new ServerTPSUtils();
+                    String tps = tpsUtils.getTPS(0);
+                    if (configFile.getBoolean("tps.console.enabled")){
+                        logger.info(ColorUtils.translateColorCodes(messagesFile.getString("console-TPS").replace(PREFIX_PLACEHOLDER, PREFIX)
+                                .replace(TPS_PLACEHOLDER, tps)));
+                    }
+                    SpeedLimit.setServerTPS(Double.valueOf(tps));
+                    checkTPSOne();
+                    Bukkit.getScheduler().cancelTask(taskID3);
                 }else {
                     time --;
                 }

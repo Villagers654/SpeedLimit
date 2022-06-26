@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 
 public class SLHelp implements CommandExecutor {
 
-    private static final FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
-    private static final String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
+    private FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    private String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
     private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     Logger logger = SpeedLimit.getPlugin().getLogger();

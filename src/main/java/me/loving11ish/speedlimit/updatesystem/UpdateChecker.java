@@ -18,8 +18,8 @@ public class UpdateChecker {
     private Plugin plugin;
     private int resourceId;
 
-    private static final FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
-    private static final String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
+    private FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    private String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
     private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
     private static final String ERROR_PLACEHOLDER = "%ERROR%";
 

@@ -9,6 +9,7 @@
 #                           --[Plugin Messages File]--                             #
 #----------------------------------------------------------------------------------#
 #----------------------------------------------------------------------------------#
+#SpeedLimit messages config for ${version}
 #Changing the prefix requires a restart or '/reload' to take effect.
 plugin-prefix: "&7[&bSpeed&3Limit&7]"
 #----------------------------------------------------------------------------------#

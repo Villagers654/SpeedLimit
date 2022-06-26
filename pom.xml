@@ -6,7 +6,7 @@
 
     <groupId>me.loving11ish</groupId>
     <artifactId>SpeedLimit</artifactId>
-    <version>5.4.1</version>
+    <version>5.4.2</version>
     <packaging>jar</packaging>
 
     <name>SpeedLimit</name>
