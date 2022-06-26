@@ -1,3 +1,10 @@
+**18/06/2022 BUG UPDATE!**
+
+CURRENTLY THERE IS A SEVERE BUG IN THE LATEST RELEASE!
+
+PLEASE EITHER DISABLE UNTIL I CAN PATCH IT OR DOWNGRADE TO THE PREVIOUS RELEASE IF YOUR STILL USING 1.18.2 OR LOWER!
+
+
 # SpeedLimit
 This plugin allows an admin to limit a players movement speed on join, this also resets there speed everytime they rejoin.
 
