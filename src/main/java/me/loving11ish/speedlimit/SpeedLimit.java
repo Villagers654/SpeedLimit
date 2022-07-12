@@ -82,7 +82,8 @@ public final class SpeedLimit extends JavaPlugin {
         ElytraFlightEvent.updateElytraTriggerValue();
 
         //Start TPS checking tasks
-        TPSCheckTasks.checkTPSOne();
+        TPSCheckTasks tpsCheckTasks = new TPSCheckTasks();
+        tpsCheckTasks.checkTPSOne();
 
         //Plugin load message
         logger.info("-------------------------------------------");

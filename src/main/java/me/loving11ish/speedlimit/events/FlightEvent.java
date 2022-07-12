@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 public class FlightEvent implements Listener {
 
-    private FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
+    FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
 
     @EventHandler (priority = EventPriority.HIGHEST)
     public void OnFlightEvent(PlayerToggleFlightEvent event) {

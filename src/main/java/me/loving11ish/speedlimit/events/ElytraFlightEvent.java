@@ -16,10 +16,10 @@ public class ElytraFlightEvent implements Listener {
     public static Integer taskID1;
     private static double velocityTriggerMultiplier;
 
-    private FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
-    private FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
-    private String PREFIX = messagesFile.getString("plugin-prefix");
-    private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
+    FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
+    FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    String PREFIX = messagesFile.getString("plugin-prefix");
+    final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     public static void updateElytraTriggerValue(){
         taskID1 = Bukkit.getScheduler().scheduleSyncDelayedTask(SpeedLimit.getPlugin(), new Runnable() {
@@ -40,7 +40,7 @@ public class ElytraFlightEvent implements Listener {
         float pitch = event.getFrom().getPitch();
         if (configFile.getBoolean("elytra-flight-event.disable-all-elytra-flight")){
             if (player.isGliding()){
-                Location location = new Location(player.getWorld(), x, y, z, yaw, pitch);
+                Location location = new Location(player.getWorld(), x, y + 1, z, yaw, pitch);
                 player.setGliding(false);
                 player.teleport(location);
                 player.sendMessage(ColorUtils.translateColorCodes(
@@ -62,7 +62,7 @@ public class ElytraFlightEvent implements Listener {
             if (Math.abs(event.getFrom().getX() - event.getTo().getX()) > velocityTriggerMultiplier
                     ||Math.abs(event.getFrom().getY() - event.getTo().getY()) > velocityTriggerMultiplier
                     ||Math.abs(event.getFrom().getZ() - event.getTo().getZ()) > velocityTriggerMultiplier){
-                Location oldLocation = new Location(player.getWorld(), x, y, z, yaw, pitch);
+                Location oldLocation = new Location(player.getWorld(), x, y + 1, z, yaw, pitch);
                 if (configFile.getBoolean("elytra-flight-event.speed-limit.cancel-event")){
                     event.setCancelled(true);
                 }else {

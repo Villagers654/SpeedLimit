@@ -12,10 +12,10 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class ElytraTPSFlightEvent implements Listener {
 
-    private FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
-    private FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
-    private String PREFIX = messagesFile.getString("plugin-prefix");
-    private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
+    FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
+    FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    String PREFIX = messagesFile.getString("plugin-prefix");
+    final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onTPSElytraFlightCheck(PlayerMoveEvent event){
@@ -29,7 +29,7 @@ public class ElytraTPSFlightEvent implements Listener {
                 double yTop = event.getFrom().getY();
                 Location location = new Location(player.getWorld(), x, yTop, z, yaw, pitch);
                 yTop = location.getWorld().getHighestBlockYAt(location);
-                location.setY(yTop);
+                location.setY(yTop + 1);
                 player.setGliding(false);
                 player.teleport(location);
                 if (configFile.getBoolean("tps.dynamic-elytra-check.send-warning-message")){

@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 
 public class SLReload implements CommandExecutor {
 
-    private FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
-    private String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
-    private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
+    FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
+    final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     Logger logger = SpeedLimit.getPlugin().getLogger();
 

@@ -73,10 +73,9 @@ tps:
   #If your server is lightweight try increasing this
   run-interval: 300 #[Default: 300] {range: 60 - 900} 300 = 5 minutes.
 
-  #Do you want to use the server TPS to dynamically disable Elytras based on the value?
   dynamic-elytra-check:
-
-    enabled: true #[Default: true]
+    #Do you want to use the server TPS to dynamically disable Elytras based on the value?
+    enabled: false #[Default: false]
 
     #This is the TPS value you want the plugin to trigger at or if below it.
     trigger-value: 15.0 #[Default: 15.0] {recommended: do not set above 17.0}

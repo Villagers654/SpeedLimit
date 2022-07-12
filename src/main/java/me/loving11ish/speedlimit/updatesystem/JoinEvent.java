@@ -10,9 +10,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinEvent implements Listener {
 
-    private FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
-    private String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
-    private static final String PREFIX_PLACEHOLDER = "%PREFIX%";
+    FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
+    String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
+    final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {

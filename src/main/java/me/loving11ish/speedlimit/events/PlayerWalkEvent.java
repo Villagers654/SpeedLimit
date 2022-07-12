@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PlayerWalkEvent implements Listener {
 
-    private FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
+    FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
 
     @EventHandler (priority = EventPriority.HIGH)
     public void OnPlayerWalk (PlayerMoveEvent event){
