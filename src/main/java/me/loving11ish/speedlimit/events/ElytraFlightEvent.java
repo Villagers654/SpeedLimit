@@ -40,7 +40,9 @@ public class ElytraFlightEvent implements Listener {
         float pitch = event.getFrom().getPitch();
         if (configFile.getBoolean("elytra-flight-event.disable-all-elytra-flight")){
             if (player.isGliding()){
-                Location location = new Location(player.getWorld(), x, y + 1, z, yaw, pitch);
+                Location location = new Location(player.getWorld(), x, y, z, yaw, pitch);
+                y = location.getWorld().getHighestBlockYAt(location);
+                location.setY(y + 1);
                 player.setGliding(false);
                 player.teleport(location);
                 player.sendMessage(ColorUtils.translateColorCodes(

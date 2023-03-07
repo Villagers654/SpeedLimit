@@ -45,7 +45,7 @@ reload-successful-4: "&e[---------------------------------------------------]"
 help-no-permission: "%PREFIX% &4You do not have the permission &7'&eSpeedLimit.help&7' &4required to execute that command!"
 reload-no-permission: "%PREFIX% &4You do not have the permission &7'&eSpeedLimit.reload&7' &4required to execute that command!"
 #----------------------------------------------------------------------------------#
-elytras-disabled-warning: "%PREFIX% &cElytra's have been disabled by and administrator"
+elytras-disabled-warning: "%PREFIX% &cElytra's have been disabled by an administrator"
 #----------------------------------------------------------------------------------#
 TPS-elytras-disabled-warning: "%PREFIX% &cYour elytra has been disabled due to TPS drop!"
 #----------------------------------------------------------------------------------#

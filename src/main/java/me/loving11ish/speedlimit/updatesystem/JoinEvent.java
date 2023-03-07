@@ -20,11 +20,11 @@ public class JoinEvent implements Listener {
         if (player.hasPermission("SpeedLimit.update")|| player.hasPermission("SpeedLimit.*")||player.isOp()) {
             new UpdateChecker(SpeedLimit.getPlugin(), 75269).getVersion(version -> {
                 if (!(SpeedLimit.getPlugin().getDescription().getVersion().equalsIgnoreCase(version))) {
-                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-1")
+                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-update-available-1")
                             .replace(PREFIX_PLACEHOLDER, PREFIX)));
-                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-2")
+                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-update-available-2")
                             .replace(PREFIX_PLACEHOLDER, PREFIX)));
-                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-no-update-3")
+                    player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-update-available-3")
                             .replace(PREFIX_PLACEHOLDER, PREFIX)));
                 }
             });

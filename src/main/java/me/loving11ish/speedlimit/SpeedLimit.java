@@ -51,6 +51,7 @@ public final class SpeedLimit extends JavaPlugin {
             logger.warning(ChatColor.RED + "SpeedLimit - Is now disabling!");
             logger.warning(ChatColor.RED + "-------------------------------------------");
             Bukkit.getPluginManager().disablePlugin(this);
+            return;
         }else {
             logger.info(ChatColor.GREEN + "-------------------------------------------");
             logger.info(ChatColor.GREEN + "SpeedLimit - A supported Minecraft version has been detected");
@@ -103,11 +104,11 @@ public final class SpeedLimit extends JavaPlugin {
                 logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-no-update-3")
                         .replace(PREFIX_PLACEHOLDER, PREFIX)));
             }else {
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-1")
+                logger.warning(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-1")
                         .replace(PREFIX_PLACEHOLDER, PREFIX)));
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-2")
+                logger.warning(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-2")
                         .replace(PREFIX_PLACEHOLDER, PREFIX)));
-                logger.info(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-3")
+                logger.warning(ColorUtils.translateColorCodes(messagesDataManager.getMessagesConfig().getString("plugin-update-available-3")
                         .replace(PREFIX_PLACEHOLDER, PREFIX)));
             }
         });
