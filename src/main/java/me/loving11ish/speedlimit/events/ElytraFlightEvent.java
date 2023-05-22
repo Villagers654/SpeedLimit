@@ -1,8 +1,10 @@
 package me.loving11ish.speedlimit.events;
 
+import com.tcoded.folialib.FoliaLib;
+import com.tcoded.folialib.wrapper.WrappedTask;
+import io.papermc.lib.PaperLib;
 import me.loving11ish.speedlimit.SpeedLimit;
 import me.loving11ish.speedlimit.utils.ColorUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -11,10 +13,13 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import java.util.concurrent.TimeUnit;
+
 public class ElytraFlightEvent implements Listener {
 
-    public static Integer taskID1;
+    public static WrappedTask wrappedTask1;
     private static double velocityTriggerMultiplier;
+    private static FoliaLib foliaLib = SpeedLimit.getPlugin().getFoliaLib();
 
     FileConfiguration configFile = SpeedLimit.getPlugin().getConfig();
     FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
@@ -22,12 +27,12 @@ public class ElytraFlightEvent implements Listener {
     final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     public static void updateElytraTriggerValue(){
-        taskID1 = Bukkit.getScheduler().scheduleSyncDelayedTask(SpeedLimit.getPlugin(), new Runnable() {
+        wrappedTask1 = foliaLib.getImpl().runLaterAsync(new Runnable() {
             @Override
             public void run() {
                 velocityTriggerMultiplier = SpeedLimit.getPlugin().getConfig().getDouble("elytra-flight-event.speed-limit.trigger-speed");
             }
-        }, 10);
+        }, 500L, TimeUnit.MILLISECONDS);
     }
 
     @EventHandler (priority = EventPriority.HIGHEST)
@@ -44,7 +49,7 @@ public class ElytraFlightEvent implements Listener {
                 y = location.getWorld().getHighestBlockYAt(location);
                 location.setY(y + 1);
                 player.setGliding(false);
-                player.teleport(location);
+                PaperLib.teleportAsync(player, location);
                 player.sendMessage(ColorUtils.translateColorCodes(
                         messagesFile.getString("elytras-disabled-warning").replace(PREFIX_PLACEHOLDER, PREFIX)));
             }
@@ -68,7 +73,7 @@ public class ElytraFlightEvent implements Listener {
                 if (configFile.getBoolean("elytra-flight-event.speed-limit.cancel-event")){
                     event.setCancelled(true);
                 }else {
-                    player.teleport(oldLocation);
+                    PaperLib.teleportAsync(player, oldLocation);
                 }
                 if (configFile.getBoolean("elytra-flight-event.speed-limit.send-message")){
                     player.sendMessage(ColorUtils.translateColorCodes(

@@ -37,6 +37,10 @@ plugin-help-9: "%PREFIX% &fFlying Bypass &7- &dSpeedLimit.bypass.flying"
 plugin-help-10: "%PREFIX% &fElytra Bypass &7-&dSpeedLimit.bypass.elytra"
 plugin-help-11: "&e[---------------------------------------------------]"
 #----------------------------------------------------------------------------------#
+reload-begin-1: "&e[---------------------------------------------------]"
+reload-begin-2: "%PREFIX% &7- &aBeginning plugin reload..."
+reload-begin-3: "%PREFIX% &7- &cDo not use any of SpeedLimit's features until complete!"
+reload-begin-4: "&e[---------------------------------------------------]"
 reload-successful-1: "&e[---------------------------------------------------]"
 reload-successful-2: "%PREFIX% &7- &aPlugin by Loving11ish"
 reload-successful-3: "%PREFIX% &7- &aConfiguration files have been successfully reloaded!"
@@ -51,5 +55,8 @@ TPS-elytras-disabled-warning: "%PREFIX% &cYour elytra has been disabled due to T
 #----------------------------------------------------------------------------------#
 elytra-triggered-warning: "%PREFIX% &cYou are flying too fast! Slow down!"
 #----------------------------------------------------------------------------------#
+console-TPS-task-start: "%PREFIX% &aServer auto TPS checking task has been started."
+console-TPS-task-failed-folia-1: "%PREFIX% &cIt appears you are running on Folia or a fork."
+console-TPS-task-failed-folia-2: "%PREFIX% &cAuto TPS checking task has been disabled."
 console-TPS: "%PREFIX% &eServer TPS: &a%TPS%"
 #----------------------------------------------------------------------------------#

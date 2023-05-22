@@ -1,5 +1,6 @@
 package me.loving11ish.speedlimit.events;
 
+import io.papermc.lib.PaperLib;
 import me.loving11ish.speedlimit.SpeedLimit;
 import me.loving11ish.speedlimit.utils.ColorUtils;
 import org.bukkit.Location;
@@ -31,7 +32,7 @@ public class ElytraTPSFlightEvent implements Listener {
                 yTop = location.getWorld().getHighestBlockYAt(location);
                 location.setY(yTop + 1);
                 player.setGliding(false);
-                player.teleport(location);
+                PaperLib.teleportAsync(player, location);
                 if (configFile.getBoolean("tps.dynamic-elytra-check.send-warning-message")){
                     player.sendMessage(ColorUtils.translateColorCodes(
                             messagesFile.getString("TPS-elytras-disabled-warning").replace(PREFIX_PLACEHOLDER, PREFIX)));

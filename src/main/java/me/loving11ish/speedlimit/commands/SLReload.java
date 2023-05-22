@@ -1,5 +1,6 @@
 package me.loving11ish.speedlimit.commands;
 
+import com.tcoded.folialib.FoliaLib;
 import me.loving11ish.speedlimit.events.ElytraFlightEvent;
 import me.loving11ish.speedlimit.SpeedLimit;
 import me.loving11ish.speedlimit.utils.ColorUtils;
@@ -9,40 +10,55 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.logging.Logger;
+import java.util.concurrent.TimeUnit;
 
 public class SLReload implements CommandExecutor {
 
     FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
     String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
     final String PREFIX_PLACEHOLDER = "%PREFIX%";
-
-    Logger logger = SpeedLimit.getPlugin().getLogger();
+    private FoliaLib foliaLib = SpeedLimit.getPlugin().getFoliaLib();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
             Player player = (Player) sender;
             if (player.hasPermission("SpeedLimit.reload")|| player.hasPermission("SpeedLimit.*")||player.isOp()){
-                SpeedLimit.getPlugin().reloadConfig();
-                SpeedLimit.getPlugin().messagesDataManager.reloadMessagesConfig();
-                ElytraFlightEvent.updateElytraTriggerValue();
-                player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-1").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-2").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
-                player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-4").replace(PREFIX_PLACEHOLDER, PREFIX)));
+                this.reloadPlugin(sender);
             }else {
                 player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-no-permission").replace(PREFIX_PLACEHOLDER, PREFIX)));
             }
         }else {
-            SpeedLimit.getPlugin().reloadConfig();
-            SpeedLimit.getPlugin().messagesDataManager.reloadMessagesConfig();
-            ElytraFlightEvent.updateElytraTriggerValue();
-            logger.info(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-1").replace(PREFIX_PLACEHOLDER, PREFIX)));
-            logger.info(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-2").replace(PREFIX_PLACEHOLDER, PREFIX)));
-            logger.info(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
-            logger.info(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-4").replace(PREFIX_PLACEHOLDER, PREFIX)));
+            this.reloadPlugin(sender);
         }
         return true;
     }
+
+    private void reloadPlugin(CommandSender sender) {
+        sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-begin-1").replace(PREFIX_PLACEHOLDER, PREFIX)));
+        sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-begin-2").replace(PREFIX_PLACEHOLDER, PREFIX)));
+        sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-begin-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
+        sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-begin-4").replace(PREFIX_PLACEHOLDER, PREFIX)));
+        SpeedLimit plugin = SpeedLimit.getPlugin();
+        plugin.onDisable();
+        foliaLib.getImpl().runLater(new Runnable() {
+            @Override
+            public void run() {
+                plugin.onEnable();
+            }
+        }, 5L, TimeUnit.SECONDS);
+        foliaLib.getImpl().runLater(new Runnable() {
+            @Override
+            public void run() {
+                SpeedLimit.getPlugin().reloadConfig();
+                SpeedLimit.getPlugin().messagesDataManager.reloadMessagesConfig();
+                ElytraFlightEvent.updateElytraTriggerValue();
+                sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-1").replace(PREFIX_PLACEHOLDER, PREFIX)));
+                sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-2").replace(PREFIX_PLACEHOLDER, PREFIX)));
+                sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
+                sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-successful-4").replace(PREFIX_PLACEHOLDER, PREFIX)));
+            }
+        }, 5L, TimeUnit.SECONDS);
+    }
+
 }

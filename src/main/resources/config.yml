@@ -64,16 +64,21 @@ elytra-flight-event:
 
 #----------------------------------------------------------------------------------#
 tps:
+  ##THIS FEATURE IS NOT AVAILABLE ON FOLIA AND WILL AUTO DISABLE!##
   console:
     #Do you want to print the severs TPS value to the console?
     ##This DOES NOT disable the TPS task!##
     enabled: true #[Default: true]
+    #Disable TPS update task?
+    #DO NOT DISABLE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!
+    task-enabled: true #[Default: true]
 
   #This sets the interval between TPS checking tasks
   #If your server is lightweight try increasing this
   run-interval: 300 #[Default: 300] {range: 60 - 900} 300 = 5 minutes.
 
   dynamic-elytra-check:
+    #Above {tps.console.task-enabled} MUST be set to `true` for this to function!
     #Do you want to use the server TPS to dynamically disable Elytras based on the value?
     enabled: false #[Default: false]
 

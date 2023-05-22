@@ -2,6 +2,8 @@ name: SpeedLimit
 version: ${project.version}
 main: me.loving11ish.speedlimit.SpeedLimit
 api-version: 1.13
+folia-supported: true
+softdepend: [PlugManX]
 authors: [Loving11ish]
 description: This plugin allows an admin to limit a players movement speed on join, this also resets there speed everytime they rejoin.
 commands:

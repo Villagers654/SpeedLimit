@@ -1,5 +1,6 @@
 package me.loving11ish.speedlimit.updatesystem;
 
+import com.tcoded.folialib.FoliaLib;
 import me.loving11ish.speedlimit.SpeedLimit;
 import me.loving11ish.speedlimit.utils.ColorUtils;
 import org.bukkit.Bukkit;
@@ -15,23 +16,22 @@ import java.util.logging.Logger;
 
 public class UpdateChecker {
 
-    private Plugin plugin;
     private int resourceId;
 
     FileConfiguration messagesFile = SpeedLimit.getPlugin().messagesDataManager.getMessagesConfig();
     String PREFIX = ColorUtils.translateColorCodes(messagesFile.getString("plugin-prefix"));
     final String PREFIX_PLACEHOLDER = "%PREFIX%";
     final String ERROR_PLACEHOLDER = "%ERROR%";
+    private FoliaLib foliaLib = SpeedLimit.getPlugin().getFoliaLib();
 
     Logger logger = SpeedLimit.getPlugin().getLogger();
 
-    public UpdateChecker(Plugin plugin, int resourceId) {
-        this.plugin = plugin;
+    public UpdateChecker(int resourceId) {
         this.resourceId = resourceId;
     }
 
     public void getVersion(final Consumer<String> consumer) {
-        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+        foliaLib.getImpl().runAsync(() -> {
             try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
                 if (scanner.hasNext()) {
                     consumer.accept(scanner.next());
