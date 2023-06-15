@@ -44,25 +44,28 @@ public final class SpeedLimit extends JavaPlugin {
         if (!(Bukkit.getServer().getVersion().contains("1.13")||Bukkit.getServer().getVersion().contains("1.14")
                 ||Bukkit.getServer().getVersion().contains("1.15")||Bukkit.getServer().getVersion().contains("1.16")
                 ||Bukkit.getServer().getVersion().contains("1.17")||Bukkit.getServer().getVersion().contains("1.18")
-                ||Bukkit.getServer().getVersion().contains("1.19"))){
-            logger.warning(ChatColor.RED + "-------------------------------------------");
-            logger.warning(ChatColor.RED + "SpeedLimit - This plugin is only supported on the Minecraft versions listed below:");
-            logger.warning(ChatColor.RED + "SpeedLimit - 1.13.x");
-            logger.warning(ChatColor.RED + "SpeedLimit - 1.14.x");
-            logger.warning(ChatColor.RED + "SpeedLimit - 1.15.x");
-            logger.warning(ChatColor.RED + "SpeedLimit - 1.16.x");
-            logger.warning(ChatColor.RED + "SpeedLimit - 1.17.x");
-            logger.warning(ChatColor.RED + "SpeedLimit - 1.18.x");
-            logger.warning(ChatColor.RED + "SpeedLimit - 1.19.x");
-            logger.warning(ChatColor.RED + "SpeedLimit - Is now disabling!");
-            logger.warning(ChatColor.RED + "-------------------------------------------");
+                ||Bukkit.getServer().getVersion().contains("1.19")||Bukkit.getServer().getVersion().contains("1.20"))){
+            logger.warning(ColorUtils.translateColorCodes("-------------------------------------------"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &4Your server version is: " + Bukkit.getServer().getVersion()));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &cThis plugin is only supported on the Minecraft versions listed below:"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &c1.13.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &c1.14.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &c1.15.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &c1.16.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]:: &c1.17.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &c1.18.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &c1.19.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &c1.20.x"));
+            logger.warning(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &cIs now disabling!"));
+            logger.warning(ColorUtils.translateColorCodes("-------------------------------------------"));
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }else {
-            logger.info(ChatColor.GREEN + "-------------------------------------------");
-            logger.info(ChatColor.GREEN + "SpeedLimit - A supported Minecraft version has been detected");
-            logger.info(ChatColor.GREEN + "SpeedLimit - Continuing plugin startup");
-            logger.info(ChatColor.GREEN + "-------------------------------------------");
+            logger.info(ColorUtils.translateColorCodes("-------------------------------------------"));
+            logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &aA supported Minecraft version has been detected"));
+            logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &4Your server version is: " + Bukkit.getServer().getVersion()));
+            logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &aContinuing plugin startup"));
+            logger.info(ColorUtils.translateColorCodes("-------------------------------------------"));
         }
 
         //Suggest PaperMC if not using
@@ -146,7 +149,6 @@ public final class SpeedLimit extends JavaPlugin {
             }
         }
 
-
         //Plugin load message
         logger.info("-------------------------------------------");
         logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &bPlugin by Loving11ish"));
@@ -179,7 +181,6 @@ public final class SpeedLimit extends JavaPlugin {
         //Shutdown message
         logger.info("-------------------------------------------");
         logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &bPlugin by Loving11ish"));
-        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &bPlugin Version &d&l" + pluginVersion));
 
         //Stop background tasks
         try {
@@ -201,7 +202,9 @@ public final class SpeedLimit extends JavaPlugin {
         }
 
         //Final shutdown message
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &bPlugin Version &d&l" + pluginVersion));
         logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &bPlugin shutdown successfully!"));
+        logger.info(ColorUtils.translateColorCodes("&7[&bSpeed&3Limit&7]: &bGoodbye"));
         logger.info("-------------------------------------------");
 
         //Cleanup any plugin remains
