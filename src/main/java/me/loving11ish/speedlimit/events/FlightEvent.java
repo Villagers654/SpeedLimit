@@ -19,8 +19,8 @@ public class FlightEvent implements Listener {
             player.setFlySpeed((float) 0.1);
         }
         if (!(configFile.getList("disabled-Worlds").contains(player.getWorld().getName()))){
-            if (!(player.hasPermission("SpeedLimit.bypass.flying")||player.hasPermission("SpeedLimit.bypass.*")
-                    ||player.hasPermission("SpeedLimit.*")||player.isOp())) {
+            if (!(player.hasPermission("speedlimit.bypass.flying")||player.hasPermission("speedlimit.bypass.*")
+                    ||player.hasPermission("speedlimit.*")||player.isOp())) {
                 if (configFile.getBoolean("flying-event.enabled")) {
                     player.setFlySpeed((float) configFile.getDouble("flying-event.speed"));
                 }

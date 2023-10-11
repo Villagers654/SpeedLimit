@@ -26,6 +26,10 @@ public class ElytraTPSFlightEvent implements Listener {
         float yaw = event.getFrom().getYaw();
         float pitch = event.getFrom().getPitch();
         if (configFile.getBoolean("tps.dynamic-elytra-check.enabled")){
+            if (player.hasPermission("speedlimit.bypass.elytra-tps")||player.hasPermission("speedlimit.bypass.*")
+                    ||player.hasPermission("speedlimit.*")||player.isOp()){
+                return;
+            }
             if (SpeedLimit.getServerTPS() <= configFile.getDouble("tps.dynamic-elytra-check.trigger-value")){
                 double yTop = event.getFrom().getY();
                 Location location = new Location(player.getWorld(), x, yTop, z, yaw, pitch);

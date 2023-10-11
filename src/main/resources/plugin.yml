@@ -3,13 +3,56 @@ version: ${project.version}
 main: me.loving11ish.speedlimit.SpeedLimit
 api-version: 1.13
 folia-supported: true
-softdepend: [PlugManX]
-authors: [Loving11ish]
+softdepend: [ PlugManX ]
+authors: [ Loving11ish ]
 description: This plugin allows an admin to limit a players movement speed on join, this also resets there speed everytime they rejoin.
+
 commands:
+
   slhelp:
     description: Shows the plugin help menu.
     usage: /<command>
+    permission: speedlimit.command.help
   slreload:
     description: Reloads the plugins main configuration file.
     usage: /<command>
+    permission: speedlimit.command.reload
+
+permissions:
+
+  speedlimit.*:
+    default: op
+    description: "This node grants usage of all plugin features."
+    children:
+
+      speedlimit.update:
+        default: op
+        description: "This node allows seeing of in game plugin update notifications."
+
+      speedlimit.command.*:
+        default: op
+        description: "This node allows usage of all plugin commands."
+        children:
+          speedlimit.command.help:
+            default: op
+            description: "This node allows use of the /slhelp command."
+          speedlimit.command.reload:
+            default: op
+            description: "This node allows use of the /slreload command."
+
+      speedlimit.bypass.*:
+        default: op
+        description: "This node allows bypassing of ALL plugin limits."
+        children:
+          speedlimit.bypass.elytra:
+            default: op
+            description: "This node allows bypassing of the elytra flight limit."
+          speedlimit.bypass.elytra-tps:
+            default: op
+            description: "This node allows bypassing of the TPS based elytra flight limit."
+          speedlimit.bypass.flying:
+            default: op
+            description: "This node allows bypassing of the creative flight limit."
+          speedlimit.bypass.walking:
+            default: op
+            description: "This node allows bypassing of the walking limit."

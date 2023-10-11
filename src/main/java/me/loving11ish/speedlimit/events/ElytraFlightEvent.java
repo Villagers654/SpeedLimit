@@ -1,7 +1,7 @@
 package me.loving11ish.speedlimit.events;
 
 import com.tcoded.folialib.FoliaLib;
-import com.tcoded.folialib.wrapper.WrappedTask;
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import io.papermc.lib.PaperLib;
 import me.loving11ish.speedlimit.SpeedLimit;
 import me.loving11ish.speedlimit.utils.ColorUtils;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ElytraFlightEvent implements Listener {
 
-    public static WrappedTask wrappedTask1;
+    private static WrappedTask elytraTrigerUpdateTask;
     private static double velocityTriggerMultiplier;
     private static FoliaLib foliaLib = SpeedLimit.getPlugin().getFoliaLib();
 
@@ -27,12 +27,9 @@ public class ElytraFlightEvent implements Listener {
     final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     public static void updateElytraTriggerValue(){
-        wrappedTask1 = foliaLib.getImpl().runLaterAsync(new Runnable() {
-            @Override
-            public void run() {
-                velocityTriggerMultiplier = SpeedLimit.getPlugin().getConfig().getDouble("elytra-flight-event.speed-limit.trigger-speed");
-            }
-        }, 500L, TimeUnit.MILLISECONDS);
+        elytraTrigerUpdateTask = foliaLib.getImpl().runLaterAsync(() ->
+                velocityTriggerMultiplier = SpeedLimit.getPlugin().getConfig().getDouble("elytra-flight-event.speed-limit.trigger-speed")
+                , 500L, TimeUnit.MILLISECONDS);
     }
 
     @EventHandler (priority = EventPriority.HIGHEST)
@@ -61,8 +58,8 @@ public class ElytraFlightEvent implements Listener {
         if (configFile.getList("disabled-Worlds").contains(player.getWorld().getName())){
             return;
         }
-        if (player.hasPermission("SpeedLimit.bypass.elytra")||player.hasPermission("SpeedLimit.bypass")
-                ||player.hasPermission("SpeedLimit.*")||player.isOp()){
+        if (player.hasPermission("speedlimit.bypass.elytra")||player.hasPermission("speedlimit.bypass.*")
+                ||player.hasPermission("speedlimit.*")||player.isOp()){
             return;
         }
         if (player.isGliding()){
@@ -81,5 +78,9 @@ public class ElytraFlightEvent implements Listener {
                 }
             }
         }
+    }
+
+    public static WrappedTask getElytraTrigerUpdateTask() {
+        return elytraTrigerUpdateTask;
     }
 }

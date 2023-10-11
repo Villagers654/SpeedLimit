@@ -19,8 +19,8 @@ public class PlayerWalkEvent implements Listener {
             player.setWalkSpeed((float) 0.2);
         }
         if (!(configFile.getList("disabled-Worlds").contains(player.getWorld().getName()))){
-            if (!(player.hasPermission("SpeedLimit.bypass.walking")||player.hasPermission("SpeedLimit.bypass.*")
-                    ||player.hasPermission("SpeedLimit.*")||player.isOp())) {
+            if (!(player.hasPermission("speedlimit.bypass.walking")||player.hasPermission("speedlimit.bypass.*")
+                    ||player.hasPermission("speedlimit.*")||player.isOp())) {
                 if (configFile.getBoolean("walking-event.enabled")) {
                     player.setWalkSpeed((float) configFile.getDouble("walking-event.speed"));
                 }

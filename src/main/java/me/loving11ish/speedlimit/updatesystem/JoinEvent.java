@@ -17,7 +17,7 @@ public class JoinEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (player.hasPermission("SpeedLimit.update")|| player.hasPermission("SpeedLimit.*")||player.isOp()) {
+        if (player.hasPermission("speedlimit.update")|| player.hasPermission("speedlimit.*")||player.isOp()) {
             new UpdateChecker(75269).getVersion(version -> {
                 if (!(SpeedLimit.getPlugin().getDescription().getVersion().equalsIgnoreCase(version))) {
                     player.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("plugin-update-available-1")

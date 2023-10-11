@@ -1,8 +1,8 @@
 #----------------------------------------------------------------------------------#
 #----------------------------------------------------------------------------------#
 #                            ------------------------                              #
-#                            SpeedLimit Configuration                              #
-#                                 By Loving11ish                                   #
+#                           [SpeedLimit Configuration]                             #
+#                                [By Loving11ish]                                  #
 #                            ------------------------                              #
 #----------------------------------------------------------------------------------#
 #----------------------------------------------------------------------------------#
@@ -11,7 +11,7 @@
 #----------------------------------------------------------------------------------#
 #SpeedLimit config for ${version}
 #----------------------------------------------------------------------------------#
-#For a player or group to bypass this limit, give them 'SpeedLimit.bypass.walking'.
+#For a player or group to bypass this limit, give them 'speedlimit.bypass.walking'.
 walking-event:
 
   #This enables the SpeedLimit for the player's walking speed.
@@ -22,7 +22,7 @@ walking-event:
 #----------------------------------------------------------------------------------#
 
 #----------------------------------------------------------------------------------#
-#For a player or group to bypass this limit, give them 'SpeedLimit.bypass.flying'.
+#For a player or group to bypass this limit, give them 'speedlimit.bypass.flying'.
 flying-event:
 
   #This enables the SpeedLimit for the player's flying speed.
@@ -40,7 +40,7 @@ elytra-flight-event:
   disable-all-elytra-flight: false #[Default: false]
 
   speed-limit:
-    #For a player or group to bypass this limit, give them 'SpeedLimit.bypass.elytra'.
+    #For a player or group to bypass this limit, give them 'speedlimit.bypass.elytra'.
     #This enables the SpeedLimit for the player's elytra flying speed.
 
     ##When this check is triggered the plugin will automatically either cancel the event##
@@ -80,6 +80,7 @@ tps:
   dynamic-elytra-check:
     #Above {tps.console.task-enabled} MUST be set to `true` for this to function!
     #Do you want to use the server TPS to dynamically disable Elytras based on the value?
+    #For a player or group to bypass this limit, give them 'speedlimit.bypass.elytra-tps'.
     enabled: false #[Default: false]
 
     #This is the TPS value you want the plugin to trigger at or if below it.
