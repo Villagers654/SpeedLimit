@@ -42,9 +42,9 @@ public class SLReload implements CommandExecutor {
         sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-begin-3").replace(PREFIX_PLACEHOLDER, PREFIX)));
         sender.sendMessage(ColorUtils.translateColorCodes(messagesFile.getString("reload-begin-4").replace(PREFIX_PLACEHOLDER, PREFIX)));
         SpeedLimit.getPlugin().onDisable();
-        foliaLib.getImpl().runLater((task) ->
+        foliaLib.getScheduler().runLater((task) ->
                 Bukkit.getPluginManager().getPlugin("SpeedLimit").onEnable(), 5L, TimeUnit.SECONDS);
-        foliaLib.getImpl().runLater((task) -> {
+        foliaLib.getScheduler().runLater((task) -> {
             SpeedLimit.getPlugin().reloadConfig();
             SpeedLimit.getPlugin().messagesDataManager.reloadMessagesConfig();
             ElytraFlightEvent.updateElytraTriggerValue();

@@ -26,8 +26,7 @@ public class TPSCheckTasks {
     private static ServerTPSUtils tpsUtils = new ServerTPSUtils();
 
     public static void runTPSCheckTask() {
-        TPSTask = foliaLib.getImpl().runTimerAsync(() ->
-                updateServerTPS(), 1L, configFile.getInt("tps.run-interval"), TimeUnit.SECONDS);
+        TPSTask = foliaLib.getScheduler().runTimerAsync(TPSCheckTasks::updateServerTPS, 1L, configFile.getInt("tps.run-interval"), TimeUnit.SECONDS);
     }
 
     private static void updateServerTPS() {

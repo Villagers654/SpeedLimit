@@ -27,7 +27,7 @@ public class ElytraFlightEvent implements Listener {
     final String PREFIX_PLACEHOLDER = "%PREFIX%";
 
     public static void updateElytraTriggerValue(){
-        elytraTrigerUpdateTask = foliaLib.getImpl().runLaterAsync(() ->
+        elytraTrigerUpdateTask = foliaLib.getScheduler().runLaterAsync(() ->
                 velocityTriggerMultiplier = SpeedLimit.getPlugin().getConfig().getDouble("elytra-flight-event.speed-limit.trigger-speed")
                 , 500L, TimeUnit.MILLISECONDS);
     }
